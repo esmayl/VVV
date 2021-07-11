@@ -18,21 +18,7 @@
 # and options are
 sites:
 
-  # latest version of WordPress, can be used for client work and testing
-  # Check the readme at https://github.com/Varying-Vagrant-Vagrants/custom-site-template
-  wordpress-one:
-    skip_provisioning: false
-    description: "A standard WP install, useful for building plugins, testing things, etc"
-    repo: https://github.com/Varying-Vagrant-Vagrants/custom-site-template.git
-    hosts:
-      - one.wordpress.test
-    custom:
-      wpconfig_constants:
-        WP_DEBUG: true
-        WP_DEBUG_LOG: true
-        WP_DISABLE_FATAL_ERROR_HANDLER: true # To disable in WP 5.2 the FER mode
-
-  wordpress-two:
+  wordpress-plugin-development:
     skip_provisioning: false
     description: "A standard WP install, useful for building plugins, testing things, etc"
     repo: https://github.com/Varying-Vagrant-Vagrants/custom-site-template.git
@@ -41,50 +27,13 @@ sites:
       delete_default_plugins: true
       install_plugins:
         - query-monitor
+      wpconfig_constants:
+        WP_DEBUG: true
+        WP_DEBUG_LOG: true
+        WP_DISABLE_FATAL_ERROR_HANDLER: true # To disable in WP 5.2 the FER mode
     hosts:
-      - two.wordpress.test
+      - wordpress.plugin.test
 
-  # The following commented out site configuration will create a standard WordPress
-  # site in www/example-site/ available at http://mysite.test.
-  # Remember, whitespace is significant! Tabs and spaces mean different things
-  #mysite:
-  #  description: "My website"
-  #  repo: https://github.com/Varying-Vagrant-Vagrants/custom-site-template.git
-  #  hosts:
-  #    - mysite.test
-
-  # The wordpress-develop configuration is useful for contributing to WordPress Core.
-  # It uses the built WP to serve the site
-  wordpress-trunk:
-    skip_provisioning: true # provisioning this one takes longer, so it's disabled by default
-    description: "An svn based WP Core trunk dev setup, useful for contributor days, Trac tickets, patches"
-    repo: https://github.com/Varying-Vagrant-Vagrants/custom-site-template-develop.git
-    hosts:
-      - trunk.wordpress.test
-
-  # The following commented out site configuration will create a environment useful
-  # for contributions to the WordPress meta team, .e.g WordCamps, .org, etc:
-  wordpress-meta-environment:
-    skip_provisioning: true # disabled by default, this takes a long time to provision
-    description: "An environment useful for contributions to the WordPress meta team."
-    repo: https://github.com/WordPress/meta-environment.git
-    hosts:
-      - wp-meta.test
-    custom:
-      provision_site:
-        "buddypressorg.test": true
-        "jobs.wordpressnet.test": true
-        "wordcamp.test": true
-        "wordpressorg.test": true
-        "wordpresstv.test": true
-
-  # The following commented out site configuration will create a standard WordPress
-  # site in www/example-site/ available at http://my-example-site.test.
-  # Remember, whitespace is significant! Tabs and spaces mean different things
-  #example-site:
-  #  repo: https://github.com/Varying-Vagrant-Vagrants/custom-site-template.git
-  #  hosts:
-  #    - my-example-site.test
 
 # Utilities https://varyingvagrantvagrants.org/docs/en-US/utilities/
 # are system level items that aren't websites, that install tools or packages
@@ -93,9 +42,9 @@ utilities:
   core: # The core VVV utility
     - tls-ca # HTTPS SSL/TLS certificates
     - phpmyadmin # Web based database client
-    #- memcached-admin # Object cache management
-    #- opcache-status # opcache management
-    #- webgrind # PHP Debugging
+    - memcached-admin # Object cache management
+    - opcache-status # opcache management
+    - webgrind # PHP Debugging
     #- mongodb # needed for Tideways/XHGui
     #- tideways # PHP profiling tool, also installs xhgui check https://varyingvagrantvagrants.org/docs/en-US/references/tideways-xhgui/
     #- nvm # Node Version Manager
@@ -113,9 +62,9 @@ utilities:
 vm_config:
   # For WP core development we recommend at least 2GB ( 2048 ),
   # If you have 4GB of RAM, lower this to 768MB or you may encounter issues
-  memory: 2048
+  memory: 4096
   # CPU cores:
-  cores: 2
+  cores: 3
 
   # this tells VVV to use the prebuilt box copied from the USB drive at contributor days
   # once set to false, do not change back to true, and reprovision

@@ -12,7 +12,6 @@ Icon\r\r
 # This is a file intended for hooking in a custom Vagrant configuration on up
 /Customfile
 /vvv-custom.yml
-/config/config.yml
 
 # Allow for custom provisioning scripts that are not included with the repo
 /provision/provision-custom.sh
@@ -53,9 +52,6 @@ Icon\r\r
 # Log files should be ignored.
 /log/*
 !/log/README.md
-
-# No need to share our individual sites with each other
-/www/*
 
 # And no need to share individual SQL files with each other
 *.sql
