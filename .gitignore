@@ -75,3 +75,5 @@ Icon\r\r
 # But not the custom phpMyAdmin config in the database-admin directory.
 /www/default/*
 /certificates
+/www/wordpress-plugin-development/
+/www/wordpress-plugin-development/*
